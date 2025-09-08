@@ -1,53 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My First Webpage</title>
+    <title>JavaScript Fundamentals - All in One</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        #numbers {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to My Website</h1>
-    <p>This is a simple HTML5 webpage.</p>
-  </header>
 
-  <nav>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#github">GitHub</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+    <h1 id="greeting">Welcome!</h1>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hi! I’m learning how to build websites with HTML5.</p>
-    <img src="https://via.placeholder.com/300" alt="Placeholder Image" />
-  </section>
+    <button onclick="askName()">Greet Me</button>
+    <button onclick="changeBackground()">Change Background</button>
+    <button onclick="toggleMessage()">Show/Hide Message</button>
 
-  <section id="github">
-    <h2>Visit My GitHub</h2>
-    <p>
-      Click here to check out my work:
-      <a href="https://github.com/" target="_blank">My GitHub Profile</a>
-    </p>
-  </section>
+    <p id="message" style="display:none;">This is a hidden message.</p>
 
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <form action="mailto:yourname@example.com" method="post" enctype="text/plain">
-      <label for="name">Name:</label><br />
-      <input type="text" id="name" name="name" required /><br /><br />
+    <div id="numbers"></div>
 
-      <label for="email">Email:</label><br />
-      <input type="email" id="email" name="email" required /><br /><br />
+    <script>
+        // Ask user's name and update greeting
+        function askName() {
+            let name = prompt("What is your name?");
+            document.getElementById("greeting").innerText = "Hello, " + name + "!";
+        }
 
-      <input type="submit" value="Send" />
-    </form>
-  </section>
+        // Change the background color
+        function changeBackground() {
+            document.body.style.backgroundColor = "#530ddee4";
+        }
 
-  <footer>
-    <p>&copy; 2025 My First Website</p>
-  </footer>
+        // Show or hide the message
+        function toggleMessage() {
+            let msg = document.getElementById("message");
+            if (msg.style.display === "none") {
+                msg.style.display = "block";
+            } else {
+                msg.style.display = "none";
+            }
+        }
+
+        // Display numbers from 1 to 10
+        for (let i = 1; i <= 10; i++) {
+            document.getElementById("numbers").innerHTML += i + " ";
+        }
+    </script>
+
 </body>
 </html>

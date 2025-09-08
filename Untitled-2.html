@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Fundamentals - Enhanced</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #110ddee4;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode {
+            background-color: #530ddee4;
+            color: white;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+        #numbers, #clock, #counter {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="greeting">Welcome!</h1>
+
+    <!-- Section 1: Greet User -->
+    <div class="section">
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button onclick="greetUser()">Greet Me</button>
+    </div>
+
+    <!-- Section 2: Background Color -->
+    <div class="section">
+        <button onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+    </div>
+
+    <!-- Section 3: Show/Hide Message -->
+    <div class="section">
+        <button onclick="toggleMessage()">Show/Hide Message</button>
+        <p id="message" style="display:none;">👋 Hello there! This is a hidden message.</p>
+    </div>
+
+    <!-- Section 4: Display Numbers -->
+    <div class="section">
+        <div id="numbers">Numbers: </div>
+    </div>
+
+    <!-- Section 5: Live Clock -->
+    <div class="section">
+        <div id="clock">⏰ Loading time...</div>
+    </div>
+
+    <!-- Section 6: Counter -->
+    <div class="section">
+        <button onclick="decreaseCount()">-</button>
+        <span id="counter">0</span>
+        <button onclick="increaseCount()">+</button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Greet user based on input
+        function greetUser() {
+            let name = document.getElementById("nameInput").value;
+            let greeting = name ? "Hello, " + name + "!" : "Please enter your name.";
+            document.getElementById("greeting").innerText = greeting;
+        }
+
+        // Toggle dark/light mode
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        // Show/hide message
+        function toggleMessage() {
+            let msg = document.getElementById("message");
+            msg.style.display = (msg.style.display === "none") ? "block" : "none";
+        }
+
+        // Display numbers 1 to 10
+        for (let i = 1; i <= 10; i++) {
+            document.getElementById("numbers").innerHTML += i + " ";
+        }
+
+        // Live clock
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById("clock").innerText = "⏰ Time: " + timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // run once immediately
+
+        // Counter
+        let count = 0;
+        function increaseCount() {
+            count++;
+            document.getElementById("counter").innerText = count;
+        }
+
+        function decreaseCount() {
+            count--;
+            document.getElementById("counter").innerText = count;
+        }
+    </script>
+
+</body>
+</html>

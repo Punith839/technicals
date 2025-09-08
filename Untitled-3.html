@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Fundamentals - Enhanced</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #110ddee4;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode {
+            background-color: #530ddee4;
+            color: white;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+        #numbers, #clock, #counter, #date {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="greeting">Welcome!</h1>
+
+    <!-- Section 0: Auto Greeting -->
+    <div class="section">
+        <p id="autoGreeting">🌞 Good Day!</p>
+    </div>
+
+    <!-- Section 1: Greet User -->
+    <div class="section">
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button onclick="greetUser()">Greet Me</button>
+        <button onclick="speakGreeting()">🔊 Speak Greeting</button>
+        <button onclick="copyGreeting()">📋 Copy Greeting</button>
+        <span id="copyStatus" style="margin-left:10px;"></span>
+    </div>
+
+    <!-- Section 2: Background Color -->
+    <div class="section">
+        <button onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+        <button onclick="randomBackground()">Random Background Color</button>
+    </div>
+
+    <!-- Section 3: Show/Hide Message -->
+    <div class="section">
+        <button onclick="toggleMessage()">Show/Hide Message</button>
+        <p id="message" style="display:none;">👋 Hello there! This is a hidden message.</p>
+    </div>
+
+    <!-- Section 4: Display Numbers -->
+    <div class="section">
+        <div id="numbers">Numbers: </div>
+    </div>
+
+    <!-- Section 5: Live Clock & Date -->
+    <div class="section">
+        <div id="clock">⏰ Loading time...</div>
+        <div id="date">📅 Date: </div>
+    </div>
+
+    <!-- Section 6: Counter -->
+    <div class="section">
+        <button onclick="decreaseCount()">-</button>
+        <span id="counter">0</span>
+        <button onclick="increaseCount()">+</button>
+        <button onclick="resetCounter()">Reset</button>
+    </div>
+
+    <!-- Section 7: Favorite Color -->
+    <div class="section">
+        <input type="text" id="colorInput" placeholder="Your favorite color">
+        <button onclick="showColor()">Show Color</button>
+        <p id="colorDisplay"></p>
+    </div>
+
+    <!-- Section 8: Multiplication Table -->
+    <div class="section">
+        <input type="number" id="tableNumber" placeholder="Enter a number">
+        <button onclick="generateTable()">Show Table</button>
+        <div id="tableOutput"></div>
+    </div>
+
+    <!-- Section 9: Dice Roll -->
+    <div class="section">
+        <button onclick="rollDice()">🎲 Roll Dice</button>
+        <p id="diceResult"></p>
+    </div>
+
+    <!-- Section 10: Toggle Image -->
+    <div class="section">
+        <button onclick="toggleImage()">🖼️ Show/Hide Image</button><br><br>
+        <img id="myImage" src="https://via.placeholder.com/150" alt="Sample Image" style="display:none;">
+    </div>
+
+    <!-- Section 11: Text Case Converter -->
+    <div class="section">
+        <input type="text" id="textCaseInput" placeholder="Enter text">
+        <button onclick="toUpperCase()">UPPERCASE</button>
+        <button onclick="toLowerCase()">lowercase</button>
+        <p id="convertedText"></p>
+    </div>
+
+    <!-- Section 12: Random Quote Generator -->
+    <div class="section">
+        <button onclick="generateQuote()">💡 Get Random Quote</button>
+        <p id="quoteDisplay"></p>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Greet user
+        function greetUser() {
+            let name = document.getElementById("nameInput").value;
+            let greeting = name ? "Hello, " + name + "!" : "Please enter your name.";
+            document.getElementById("greeting").innerText = greeting;
+            document.getElementById("nameInput").value = "";
+        }
+
+        // Auto greeting
+        function autoGreetByTime() {
+            const hour = new Date().getHours();
+            let greetingText = hour < 12 ? "☀️ Good Morning!" :
+                               hour < 18 ? "🌤️ Good Afternoon!" :
+                               "🌙 Good Evening!";
+            document.getElementById("autoGreeting").innerText = greetingText;
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        // Random background
+        function randomBackground() {
+            const colors = ["#530ddee4", "#110ddee4", "#592404f4", "#dc15aae5"];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+        }
+
+        // Show/hide message
+        function toggleMessage() {
+            let msg = document.getElementById("message");
+            msg.style.display = (msg.style.display === "none") ? "block" : "none";
+        }
+
+        // Display numbers
+        for (let i = 1; i <= 10; i++) {
+            document.getElementById("numbers").innerHTML += i + " ";
+        }
+
+        // Clock and date
+        function updateClock() {
+            const now = new Date();
+            document.getElementById("clock").innerText = "⏰ Time: " + now.toLocaleTimeString();
+            document.getElementById("date").innerText = "📅 Date: " + now.toDateString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Counter functions
+        let count = 0;
+        function increaseCount() {
+            count++;
+            document.getElementById("counter").innerText = count;
+        }
+        function decreaseCount() {
+            count--;
+            document.getElementById("counter").innerText = count;
+        }
+        function resetCounter() {
+            count = 0;
+            document.getElementById("counter").innerText = count;
+        }
+
+        // Show color
+        function showColor() {
+            const color = document.getElementById("colorInput").value;
+            if (color) {
+                document.getElementById("colorDisplay").innerText = "🎨 Your favorite color is: " + color;
+                document.getElementById("colorInput").value = "";
+            }
+        }
+
+        // 🎤 Text-to-Speech
+        function speakGreeting() {
+            let text = document.getElementById("greeting").innerText;
+            let speech = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(speech);
+        }
+
+        // 📋 Copy to clipboard
+        function copyGreeting() {
+            const greeting = document.getElementById("greeting").innerText;
+            navigator.clipboard.writeText(greeting)
+                .then(() => document.getElementById("copyStatus").innerText = "Copied!")
+                .catch(() => document.getElementById("copyStatus").innerText = "Failed to copy.");
+            setTimeout(() => {
+                document.getElementById("copyStatus").innerText = "";
+            }, 2000);
+        }
+
+        // 🔢 Multiplication table
+        function generateTable() {
+            let num = parseInt(document.getElementById("tableNumber").value);
+            let output = "";
+            if (!isNaN(num)) {
+                for (let i = 1; i <= 10; i++) {
+                    output += `${num} x ${i} = ${num * i}<br>`;
+                }
+            } else {
+                output = "Please enter a valid number.";
+            }
+            document.getElementById("tableOutput").innerHTML = output;
+        }
+
+                // 🎲 Dice roll (continued)
+        function rollDice() {
+            const dice = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("diceResult").innerText = "🎲 You rolled: " + dice;
+        }
+
+        // 📸 Toggle Image Display
+        function toggleImage() {
+            const img = document.getElementById("myImage");
+            img.style.display = (img.style.display === "none") ? "block" : "none";
+        }
+
+        // 🔠 Text Case Converter
+        function toUpperCase() {
+            const input = document.getElementById("textCaseInput").value;
+            document.getElementById("convertedText").innerText = input.toUpperCase();
+        }
+
+        function toLowerCase() {
+            const input = document.getElementById("textCaseInput").value;
+            document.getElementById("convertedText").innerText = input.toLowerCase();
+        }
+
+        // 🎯 Random Quote Generator
+        const quotes = [
+            "Believe you can and you're halfway there.",
+            "Success is not final, failure is not fatal.",
+            "It always seems impossible until it’s done.",
+            "Don’t watch the clock; do what it does. Keep going.",
+            "Start where you are. Use what you have. Do what you can.",
+            "The best way to get started is to quit talking and begin doing.",
+            "Dream bigger. Do bigger."
+        ];
+
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById("quoteDisplay").innerText = quotes[randomIndex];
+        }
+
+        // Run auto greeting on page load
+        autoGreetByTime();
+    </script>
+</body>
+</html>
+
